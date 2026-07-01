@@ -1,0 +1,19 @@
+# Dependencias (se regeneran con npm install)
+node_modules/
+
+# Base de datos local (datos personales, no deben subirse al repo)
+album.db
+album.db-journal
+album.db-wal
+album.db-shm
+
+# Fotos subidas por los usuarios (datos personales)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Variables de entorno (si más adelante guardas contraseñas de SQL Server ahí)
+.env

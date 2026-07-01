@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestro Álbum · Un libro de recuerdos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Caveat:wght@500;700&family=Poppins:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Portada -->
+    <section id="cover" class="cover">
+      <div class="cover-frame">
+        <span class="cover-eyebrow">un lugar solo para nosotros</span>
+        <h1 class="cover-title">Nuestro Álbum</h1>
+        <p class="cover-subtitle">Cada foto, con su propia historia debajo.</p>
+        <button id="openBookBtn" class="btn-open" type="button">Abrir el álbum</button>
+      </div>
+      <div class="cover-ribbon" aria-hidden="true"></div>
+    </section>
+
+    <!-- Libro -->
+    <section id="book" class="book hidden" aria-hidden="true">
+      <header class="book-header">
+        <button id="closeBookBtn" class="btn-icon" type="button" aria-label="Cerrar álbum">‹ portada</button>
+        <h2 class="book-title">Nuestro Álbum</h2>
+        <button id="addPhotoBtn" class="btn-add" type="button">+ Nuevo recuerdo</button>
+      </header>
+
+      <div class="book-stage">
+        <button id="prevBtn" class="nav-btn nav-prev" type="button" aria-label="Página anterior">&#10094;</button>
+
+        <div class="spread" id="spread">
+          <!-- Las páginas (izquierda / derecha) se insertan aquí por script.js -->
+        </div>
+
+        <button id="nextBtn" class="nav-btn nav-next" type="button" aria-label="Página siguiente">&#10095;</button>
+      </div>
+
+      <div class="ribbon-nav" id="ribbonNav" aria-label="Progreso del álbum"></div>
+    </section>
+
+    <!-- Estado vacío -->
+    <div id="emptyState" class="empty-state hidden">
+      <p class="empty-title">Estas páginas están esperando.</p>
+      <p class="empty-text">Agrega la primera foto y empieza a escribir esta historia.</p>
+      <button id="emptyAddBtn" class="btn-open" type="button">Agregar el primer recuerdo</button>
+    </div>
+
+    <!-- Modal: agregar / editar recuerdo -->
+    <div id="uploadModal" class="modal hidden">
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="closeModalBtn" type="button" aria-label="Cerrar">&times;</button>
+        <h3 id="modalTitle">Agregar un recuerdo</h3>
+
+        <form id="uploadForm" novalidate>
+          <input type="hidden" id="editId" value="" />
+
+          <label class="dropzone" id="dropzone" for="photoInput">
+            <input type="file" id="photoInput" accept="image/*" />
+            <span id="dropzoneText">Arrastra una foto aquí, o toca para elegirla</span>
+            <img id="previewImg" class="preview-img hidden" alt="Vista previa de la foto" />
+          </label>
+
+          <label class="field">
+            <span>Título (opcional)</span>
+            <input type="text" id="titleInput" maxlength="60" placeholder="Ej. Nuestro primer viaje" />
+          </label>
+
+          <label class="field">
+            <span>Nota</span>
+            <textarea id="noteInput" maxlength="400" rows="4" placeholder="Escribe lo que sentiste en ese momento..." required></textarea>
+          </label>
+
+          <label class="field">
+            <span>Fecha (opcional)</span>
+            <input type="date" id="dateInput" />
+          </label>
+
+          <p class="field-error hidden" id="formError"></p>
+
+          <div class="modal-actions">
+            <button type="button" id="deleteBtn" class="btn-delete hidden">Eliminar recuerdo</button>
+            <button type="submit" class="btn-save" id="saveBtn">Guardar en el álbum</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden" role="status"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
